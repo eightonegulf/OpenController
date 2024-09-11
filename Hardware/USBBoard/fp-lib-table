@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Connectors")(type "KiCad")(uri "C:/Users/Chris/source/repos/OpenController/Hardware/Libraries/Connectors.pretty")(options "")(descr ""))
+)
