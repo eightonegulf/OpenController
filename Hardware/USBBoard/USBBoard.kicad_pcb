@@ -165,7 +165,7 @@
 
   (footprint "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" (layer "F.Cu")
     (tstamp 057d3fb4-7add-4202-94cc-09bf5d282b59)
-    (at -15.2615 -2.159)
+    (at -47.7305 -10.922)
     (descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
     (tags "capacitor handsolder")
     (property "Sheetfile" "USBBoard.kicad_sch")
@@ -443,7 +443,7 @@
 
   (footprint "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder" (layer "F.Cu")
     (tstamp 4b986108-0418-4502-8739-4e4c64a4bba8)
-    (at 14.9455 -21.311)
+    (at 30.8205 -17.018)
     (descr "Tantalum Capacitor SMD Kemet-A (3216-18 Metric), IPC_7351 nominal, (Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf), generated with kicad-footprint-generator")
     (tags "capacitor tantalum")
     (property "Sheetfile" "USBBoard.kicad_sch")
@@ -975,7 +975,7 @@
 
   (footprint "Package_TO_SOT_SMD:SOT-223" (layer "F.Cu")
     (tstamp c0d28f45-7d8e-4db7-9950-e9d014f88284)
-    (at -24.79 -20.08)
+    (at -46.584 -21.844)
     (descr "module CMS SOT223 4 pins")
     (tags "CMS SOT")
     (property "Sheetfile" "USBBoard.kicad_sch")
@@ -1251,7 +1251,7 @@
 
   (footprint "Capacitor_Tantalum_SMD:CP_EIA-3216-18_Kemet-A_Pad1.58x1.35mm_HandSolder" (layer "F.Cu")
     (tstamp f9447fc0-b7e4-4a1d-addc-7770a3562fc9)
-    (at 14.9455 -18.161)
+    (at 46.5685 -5.334)
     (descr "Tantalum Capacitor SMD Kemet-A (3216-18 Metric), IPC_7351 nominal, (Body size from: http://www.kemet.com/Lists/ProductCatalog/Attachments/253/KEM_TC101_STD.pdf), generated with kicad-footprint-generator")
     (tags "capacitor tantalum")
     (property "Sheetfile" "USBBoard.kicad_sch")
@@ -1340,7 +1340,7 @@
 
   (footprint "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical" (layer "B.Cu")
     (tstamp 65e15d49-66f4-42c1-a77a-7a47019c352a)
-    (at 22.717 5.419 180)
+    (at 46.99 14.732 180)
     (descr "JST PH series connector, B2B-PH-K (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator")
     (tags "connector JST PH side entry")
     (property "Sheetfile" "USBBoard.kicad_sch")
@@ -1551,27 +1551,26 @@
   (gr_arc (start -11.43 4.826) (mid -13.226051 4.082051) (end -13.97 2.286)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp f0d84bac-f7db-4423-a1fa-6e508c41df07))
 
-  (group "" (id 6e419160-7dae-4afb-b36b-74f0ed6fae22)
+  (group "" (id 5ae80237-eeec-4c41-a94c-e3d590e48130)
     (members
-      9fc7ae75-cb9d-483a-b104-ba5820dbb04a
-      e5d91561-4228-46c9-98d3-a81c8428babf
+      6c59bba5-8c0c-46e1-a3d5-0e7b95a1a711
+      f1650c99-eb59-4066-9fe7-7616f7fdb038
+      f17f2430-3204-47c0-92a9-38e1003b621e
+      fbade2e1-fbd6-46db-8691-6e243b1c1a97
     )
   )
-  (group "" (id 136651ce-4058-401b-809c-dfe45570d33c)
+  (group "" (id b35aa1eb-7377-47d7-91fa-bf5fa3904c37)
     (members
       1b8b4129-4e0f-4907-821b-debf22a0e586
+      488da1a5-a669-4554-aef4-275d1cf42de7
       595b5577-f80f-4536-a76b-1c94b30a4fa7
       5e652a05-7d76-4dde-98b5-c17f953701ce
-      6c59bba5-8c0c-46e1-a3d5-0e7b95a1a711
-      6e419160-7dae-4afb-b36b-74f0ed6fae22
       862abcaa-c0cf-4b10-8eb4-3672ba84206c
-      863f15d1-b69c-4074-8bb0-5c7c9043105a
-      a2b0aa00-3413-4be7-a55c-03320e35ac2b
+      a8eedac0-18a2-44b1-9eed-9e6a1d79b405
       acf0a8a8-c36b-40c5-8487-7b26d87f9816
       b8d8991f-8289-4a6e-aa6a-a7f3250879c0
       e7b52943-40c6-4bba-a188-db1fdccc1976
       f0d84bac-f7db-4423-a1fa-6e508c41df07
-      f1650c99-eb59-4066-9fe7-7616f7fdb038
     )
   )
 )
