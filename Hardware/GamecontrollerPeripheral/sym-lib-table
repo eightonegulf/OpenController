@@ -1,6 +1,5 @@
 (sym_lib_table
   (version 7)
-  (lib (name "Connectors")(type "KiCad")(uri "C:/Users/Chris/source/repos/OpenController/Hardware/Libraries/Connectors.kicad_sym")(options "")(descr ""))
-  (lib (name "Mech")(type "KiCad")(uri "C:/Users/Chris/source/repos/OpenController/Hardware/Libraries/Mech.kicad_sym")(options "")(descr ""))
-  (lib (name "InputDevices")(type "KiCad")(uri "C:/Users/Chris/source/repos/OpenController/Hardware/Libraries/InputDevices.kicad_sym")(options "")(descr ""))
+  (lib (name "Connectors")(type "KiCad")(uri "${KIPRJMOD}/../Libraries/Connectors.kicad_sym")(options "")(descr ""))
+  (lib (name "InputDevices")(type "KiCad")(uri "${KIPRJMOD}/../Libraries/InputDevices.kicad_sym")(options "")(descr ""))
 )
