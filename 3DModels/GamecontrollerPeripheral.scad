@@ -10,5 +10,7 @@ module GamecontrollerPeripheral(){
 
 
 
-    translate([-50,0])rotate([0,0,180])Joystick();
+    translate([-25,-30])rotate([0,0,180])Joystick();
+    
+    translate([-50,0])DPad();
 }

@@ -63,3 +63,11 @@ module Joystick(){
     translate([7.9,0])
         Button6mm();
 }
+
+module DPad(){
+    for(i = [0 : 90 : 360]){
+        rotate(i)
+            translate([10,0])
+                Button6mm();
+    }
+}
