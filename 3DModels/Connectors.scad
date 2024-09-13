@@ -49,6 +49,16 @@ module Socket127Single(){
         Socket256Single();    
 }
 
+module Header256(rows, pins, center){
+    RepeatXY(pins, rows, 2.56, center)
+        Header256Single();
+}
+
+module Socket256(rows, pins, center){
+    RepeatXY(pins, rows, 2.56, center)
+        Socket256Single();
+}
+
 module Header127(rows, pins, center){
     RepeatXY(pins, rows, 1.27, center)
         Header127Single();
