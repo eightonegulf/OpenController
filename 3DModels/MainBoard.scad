@@ -1,6 +1,7 @@
 include <Connectors.scad>;
 include <Common.scad>;
 include <InputDevices.scad>;
+include <OutputDevices.scad>;
 include <USBBoard.scad>;
 include <GamecontrollerPeripheral.scad>;
 
@@ -64,6 +65,9 @@ module MainBoardComponents(){
     
     translate([0,-21.717])
         RotaryEncoder();
+    
+    translate([0,-10.541,11])
+        TFTDisplay();
 }
 
 module OtherBoards(){
