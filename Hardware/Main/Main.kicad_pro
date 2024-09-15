@@ -55,19 +55,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "courtyards_overlap|-12149991|-31362860|229b6508-5afe-4546-ab27-8301070b2bf5|7b464fa2-178b-4bca-8cab-d1f47a8cb875",
-        "courtyards_overlap|-16721991|-31362860|229b6508-5afe-4546-ab27-8301070b2bf5|9d14c442-8655-4427-85b1-29cd5ffa7799",
-        "courtyards_overlap|10710009|-31362860|0e94ca36-1380-4923-acfc-d73af9baa940|229b6508-5afe-4546-ab27-8301070b2bf5",
-        "courtyards_overlap|15282009|-31362860|229b6508-5afe-4546-ab27-8301070b2bf5|7b0233fc-6f72-4918-a62c-58cd5c46f444",
-        "items_not_allowed|-11430000|-29337000|7b464fa2-178b-4bca-8cab-d1f47a8cb875|00000000-0000-0000-0000-000000000000",
-        "items_not_allowed|-16002000|-29337000|9d14c442-8655-4427-85b1-29cd5ffa7799|00000000-0000-0000-0000-000000000000",
-        "items_not_allowed|11430000|-29337000|0e94ca36-1380-4923-acfc-d73af9baa940|00000000-0000-0000-0000-000000000000",
-        "items_not_allowed|16002000|-29337000|7b0233fc-6f72-4918-a62c-58cd5c46f444|00000000-0000-0000-0000-000000000000",
-        "malformed_courtyard|-4569999|1765001|ba23d45b-759c-4f38-ad94-40d07bb550f7|00000000-0000-0000-0000-000000000000",
-        "malformed_courtyard|4569998|1765001|ba23d45b-759c-4f38-ad94-40d07bb550f7|00000000-0000-0000-0000-000000000000",
-        "malformed_courtyard|4569999|1765001|ba23d45b-759c-4f38-ad94-40d07bb550f7|00000000-0000-0000-0000-000000000000"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -130,9 +118,9 @@
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.19999999999999998,
         "min_microvia_drill": 0.09999999999999999,
-        "min_resolved_spokes": 2,
+        "min_resolved_spokes": 1,
         "min_silk_clearance": 0.0,
-        "min_text_height": 0.7999999999999999,
+        "min_text_height": 0.65,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.19999999999999998,
         "min_track_width": 0.0,
@@ -424,7 +412,8 @@
   },
   "libraries": {
     "pinned_footprint_libs": [
-      "Displays"
+      "Displays",
+      "Connectors"
     ],
     "pinned_symbol_libs": [
       "ICs",
