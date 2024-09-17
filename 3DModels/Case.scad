@@ -153,9 +153,9 @@ module CaseTop(){
 }
 
 module BoardMountingLips(){
-    USBBoardLipHeight = 5.7;
+    USBBoardLipHeight = 6.2;
     USBBoardLipLength = 8.5;
-    MainBoardLipHeight = 12.5;
+    MainBoardLipHeight = 12.9;
     
     mirror([0,0,1]){
         linear_extrude(USBBoardLipHeight){
@@ -188,14 +188,28 @@ module CaseMid(){
 }
 
 module CaseBottomLid(){
+    MainPCBGap = 2;
+    
     render()
     difference(){
         union(){
             linear_extrude(CaseBottomThickness)
                 CaseBaseShape();
-            for(i = MainBoardMountingHoles){
-                translate(i)
-                    cylinder(d=10,2+CaseBottomThickness);   
+            
+            translate([0,0,CaseBottomThickness]){
+                for(i = MainBoardMountingHoles){
+                    translate(i)
+                        cylinder(d=10,MainPCBGap);   
+                }
+                
+                translate(MainBoardRotaryEncoder)
+                    cylinder(d=6,MainPCBGap);
+                
+                translate(MainBoardButtons)
+                    cylinder(d=4,MainPCBGap);
+                mirror([1,0,0])
+                    translate(MainBoardButtons)
+                        cylinder(d=4,MainPCBGap);
             }
         }
         
@@ -207,6 +221,11 @@ module CaseBottomLid(){
     }
 }
 
+module Button(){
+    color("darkgray")
+    cylinder(d=4.5,10.5);
+}
+
 /*
 linear_extrude(10)
 difference(){
@@ -215,8 +234,14 @@ difference(){
 }
 */
 
-translate([0,0,14.2])CaseTop();
-translate([0,0,14.2])CaseMid();
+translate([0,0,14.6])CaseTop();
+translate([0,0,14.6])CaseMid();
 translate([0,0,-5.1])CaseBottomLid();
+
+
+translate([0,0,7.8]){
+    translate(MainBoardButtons)Button();
+    mirror([1,0,0])translate(MainBoardButtons)Button();
+}
 
 MainBoardComplete();
