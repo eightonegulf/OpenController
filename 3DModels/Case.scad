@@ -221,9 +221,19 @@ module CaseBottomLid(){
     }
 }
 
+module ButtonSpring(){
+
+    color("silver")
+        cylinder(d=6,4);
+}
+
 module Button(){
-    color("darkgray")
-    cylinder(d=4.5,10.5);
+    color("darkgray"){
+        cylinder(d=4.5,10.5);
+        cylinder(d=7,3);
+    }
+    
+    translate([0,0,3])ButtonSpring();
 }
 
 /*
