@@ -2,10 +2,10 @@ include <Connectors.scad>;
 include <Common.scad>;
 
 USBBoardMountingHoles = [
-    [-11.43,-1.651],
-    [11.43,-1.651],
-    [-11.43,29.337],
-    [11.43,29.337]];
+    [-17,-1.651],
+    [17,-1.651],
+    [-17,29.337],
+    [17,29.337]];
 
 module MountingHole(){
     circle(d=2.1);

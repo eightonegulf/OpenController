@@ -108,3 +108,13 @@ module ConnectorPeripheralSlave(){
     
     ConnectorPeripheralBolt();
 }
+
+
+module ConnectorPeripheralMasterAngled(){
+    translate([-8/2,0,1.27])
+    rotate([0,90,0])
+    Socket127(4,2, true);
+    
+    translate([-2.25,-5])cylinder(d=2,50,center=true);
+    translate([-2.25, 5])cylinder(d=2,50,center=true);
+}

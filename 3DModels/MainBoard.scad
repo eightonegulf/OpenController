@@ -5,19 +5,41 @@ include <OutputDevices.scad>;
 include <USBBoard.scad>;
 include <GamecontrollerPeripheral.scad>;
 
+MainBoardWidth = 50;
+MainBoardLength = 72;
+MainBoardEdgeRadius = 2.54;
+
+MainBoardMountingHoleOffset = 3.5;
+MainBoardMountingHoleDiameter = 3.0;
+
 MainBoardMountingHoles = [
-    [-16.002,29.337],
-    [16.002,29.337],
-    [-16.002,-28.575],
-    [16.002,-28.575]];
+    [   -MainBoardWidth / 2 + MainBoardMountingHoleOffset, 
+        MainBoardMountingHoleOffset],
+    [   MainBoardWidth / 2 - MainBoardMountingHoleOffset, 
+        MainBoardMountingHoleOffset],
+    [   -MainBoardWidth / 2 + MainBoardMountingHoleOffset, 
+        MainBoardLength - MainBoardMountingHoleOffset],
+    [   MainBoardWidth / 2 - MainBoardMountingHoleOffset, 
+        MainBoardLength - MainBoardMountingHoleOffset]
+    ];
+    
+PowerboardConnector = [0,38];
+MainBoardTFTDisplay = [0,27.5];
 
-PeripheralA = [-17.78, 11.43];
-PeripheralB = [ 17.78, 11.43];
-PeripheralC = [ 0, -32.385];
+MainBoardButtons = [15,16];
+MainBoardRotaryEncoder = [0,16];
+
+PeripheralA = [-MainBoardWidth/2, 49.5];
+PeripheralB = [ MainBoardWidth/2, 49.5];
+PeripheralC = [ 0, 0];
 
 
-module MountingHole(){
+module MountingHoleM2(){
     circle(d=2.1);
+}
+
+module MountingHoleM3(){
+    circle(d=MainBoardMountingHoleDiameter);
 }
 
 module MainBoardMountingHoles(){
@@ -28,52 +50,67 @@ module MainBoardMountingHoles(){
 }
 
 module MainBoardPCBShape(){ 
-    width = 43.434;
-    length = 70.8660;
     
-    linear_extrude(1)
     difference(){ 
-        translate([0,length/2 - 37.084])
-            RoundedSquare(2.54,width,length);  
+        translate([0,MainBoardLength/2])
+            RoundedSquare(
+                MainBoardEdgeRadius,
+                MainBoardWidth,
+                MainBoardLength);  
         
         USBBoardMountingHoles();
         MainBoardMountingHoles();
     }
 }
 
+module MainBoardComponentsBottom(){ 
+}
 
-module MainBoardComponents(){ 
-    rotate([0,180,0])
-        ConnectorPowerboardConsumer();
+module MainBoardComponentsTop(){ 
     
     translate(PeripheralA)
-        rotate([180,0,0])
-            ConnectorPeripheralMaster();
+        rotate([0,0,180])
+            ConnectorPeripheralMasterAngled();
     
     translate(PeripheralB)
-        rotate([180,0,0])
-            ConnectorPeripheralMaster();
+        rotate([0,0,0])
+            ConnectorPeripheralMasterAngled();
     
     translate(PeripheralC)
-        rotate([180,0,-90])
-            ConnectorPeripheralMaster();
+        rotate([0,0,-90])
+            ConnectorPeripheralMasterAngled();
     
-    translate([13.97,-21.717])
+    translate(MainBoardButtons)
         Button6mm();
-    translate([-13.97,-21.717])
-        Button6mm();
-    
-    translate([0,-21.717])
+    mirror([1,0])
+        translate(MainBoardButtons)
+            Button6mm();
+        
+    translate(MainBoardRotaryEncoder)
         RotaryEncoder();
     
-    translate([0,-10.541,11])
-        TFTDisplay();
+    
+    translate(MainBoardTFTDisplay)
+        Header256(1,7, true);
+    
+    translate(MainBoardTFTDisplay)
+        translate([0,0,11])
+            TFTDisplay();
+            
+            
+    translate(PowerboardConnector)
+        rotate([0,0,0])
+            ConnectorPowerboardConsumer();    
 }
 
 module OtherBoards(){
-    translate([0,0,-5.56])
-        USBBoardComplete();
+    translate([0,0,1.6])
+    mirror([0,0,1])
+    translate(PowerboardConnector)
+        translate([0,0,-5.56])
+            USBBoardComplete();
     
+    /*
     translate([0,0,-5.56])
         translate(PeripheralA)
             GamecontrollerPeripheral();
@@ -82,11 +119,16 @@ module OtherBoards(){
     translate([0,0,-5.56])
         translate(PeripheralA)
             GamecontrollerPeripheral();
+    */
 }
 
 module MainBoardComplete(){
+    
+    linear_extrude(1.6)
     MainBoardPCBShape();
-    MainBoardComponents();
+    translate([0,0,1.6])
+    MainBoardComponentsTop();
+    MainBoardComponentsBottom();
     
     OtherBoards();
 }

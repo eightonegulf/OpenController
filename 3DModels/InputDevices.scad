@@ -44,6 +44,13 @@ module RotaryEncoder(){
     
     color("silver")
         cylinder(d=5,15);
+    
+    translate([0,0,15])
+    RotaryEncoderKnob();
+}
+
+module RotaryEncoderKnob(){
+    cylinder(d=15,5);
 }
 
 module Joystick(){
