@@ -124,6 +124,7 @@ module OtherBoards(){
 
 module MainBoardComplete(){
     
+    color("green")
     linear_extrude(1.6)
     MainBoardPCBShape();
     translate([0,0,1.6])
@@ -133,4 +134,3 @@ module MainBoardComplete(){
     OtherBoards();
 }
 
-MainBoardComplete();

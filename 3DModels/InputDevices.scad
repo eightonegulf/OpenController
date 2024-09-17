@@ -50,6 +50,7 @@ module RotaryEncoder(){
 }
 
 module RotaryEncoderKnob(){
+    color("gray")
     cylinder(d=15,5);
 }
 

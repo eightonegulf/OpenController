@@ -51,6 +51,6 @@ module USBBoardComponents(){
 
 
 module USBBoardComplete(){
-    USBBoardPCBShape();
+    color("green")USBBoardPCBShape();
     USBBoardComponents();
 }
