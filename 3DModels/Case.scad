@@ -166,9 +166,14 @@ module CaseTop(){
 
         CaseBoltHeads(); 
         CaseBolts();
+        
+        translate(MainBoardRGBLeds)
+            LightPipe();
+        mirror([1,0,0])
+            translate(MainBoardRGBLeds)
+                LightPipe();
     }    
     
-
 
 }
 
@@ -220,8 +225,8 @@ module USBPortHole(){
                     USBPortHoleFlat();
         
         hull(){
-            translate([0,0,2])
-                linear_extrude(1)
+            translate([0,0,1.5])
+                linear_extrude(0.1)
                     scale(1.5)
                         USBPortHoleFlat();
             translate([0,0,5])
@@ -267,6 +272,51 @@ module CaseMid(){
         
         translate([0,72,-9])USBPortHole();
     }   
+}
+
+module LightPipeCutoutTrace(){
+    $fn= 20;
+    width = 3;
+    radius = 4;
+    length = 5;
+    
+    translate([4,-1]){
+        translate([-radius,-radius])
+        intersection(){
+            difference(){
+                circle(r=radius+width/2);
+                circle(r=radius-width/2);
+            }
+            square(1000);
+        }
+        
+        hull(){
+            translate([-radius,0])
+                circle(d=width);
+            translate([-length,0])
+                circle(d=width);
+        }
+        
+        rotate(90)
+        hull(){
+            translate([-radius,0])
+                circle(d=width);
+            translate([-length,0])
+                circle(d=width);
+        }
+    }
+    
+}
+
+module LightPipe(){    
+    linear_extrude(5)
+        LightPipeCutoutTrace();
+    
+    linear_extrude(1)
+        minkowski(){
+            LightPipeCutoutTrace();
+            circle(d=2);
+        }
 }
 
 module CaseBottomLid(){
@@ -368,6 +418,12 @@ translate([200,0,0]){
 
 translate([300,0,0]){
     translate([0,0,50.0])CaseTop();
+    translate([0,0,25.0])CaseMid();
+    //translate([0,0,-25.0])CaseBottomLid();
+}
+
+translate([400,0,0]){
+    translate([0,0,25.0])CaseTop();
     translate([0,0,25.0])CaseMid();
     //translate([0,0,-25.0])CaseBottomLid();
 }

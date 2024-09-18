@@ -29,6 +29,8 @@ MainBoardTFTDisplay = [0,27.5];
 MainBoardButtons = [15,16];
 MainBoardRotaryEncoder = [0,16];
 
+
+MainBoardRGBLeds = [17.79,62.34];
 PeripheralA = [-MainBoardWidth/2, 49.5];
 PeripheralB = [ MainBoardWidth/2, 49.5];
 PeripheralC = [ 0, 0];
