@@ -408,7 +408,7 @@ module Case(){
 
         SidePeripheralCutout();
         mirror([1,0,0])SidePeripheralCutout();
-        BottomPeripheralCutout();
+        BottomPeripheralCutout();       
     }
 }
 

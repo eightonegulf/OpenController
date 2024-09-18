@@ -117,4 +117,5 @@ module ConnectorPeripheralMasterAngled(){
     
     translate([-2.25,-5])cylinder(d=2,50,center=true);
     translate([-2.25, 5])cylinder(d=2,50,center=true);
+    translate([-2.25, 30])cylinder(d=2,50,center=true);
 }
