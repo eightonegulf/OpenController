@@ -47,6 +47,14 @@ module CaseBaseShape(){
         RoundedSquare(BorderRadius,CaseWidth,CaseLength);
 }
 
+module CaseOutline(){
+    difference(){
+        CaseBaseShape();            
+        MainPCBShapeMargin();
+    }
+}
+
+
 module CaseBaseShape3D(){
     //BorderRadius(
 }
@@ -193,10 +201,7 @@ module CaseMid(){
             BoardMountingLips();
             mirror([0,0,1])
             linear_extrude(MainBoardLipHeight)
-            difference(){
-                CaseBaseShape();            
-                MainPCBShapeMargin();
-            }
+                CaseOutline();
         }
         
         CaseBolts();
@@ -216,6 +221,9 @@ module CaseBottomLid(){
     render()
     difference(){
         union(){
+            linear_extrude(MainPCBGap + CaseBottomThickness)
+                CaseOutline();
+            
             linear_extrude(CaseBottomThickness)
                 CaseBaseShape();
             
@@ -258,6 +266,13 @@ module Button(){
     translate([0,0,3])ButtonSpring();
 }
 
+module Case(){
+    union(){
+        CaseTop();
+        CaseMid();
+    }
+}
+
 /*
 linear_extrude(10)
 difference(){
@@ -266,15 +281,13 @@ difference(){
 }
 */
 
-translate([0,0,14.6])CaseTop();
-translate([0,0,14.6])CaseMid();
+translate([0,0,14.6])Case();
 translate([0,0,-5.1])CaseBottomLid();
 
 
 translate([100,0,0]){
-translate([0,0,25.0])CaseTop();
-translate([0,0,25.0])CaseMid();
-translate([0,0,-25.0])CaseBottomLid();
+    translate([0,0,25.0])Case();
+    translate([0,0,-25.0])CaseBottomLid();
 }
 
 translate([0,0,7.8]){
@@ -282,4 +295,19 @@ translate([0,0,7.8]){
     mirror([1,0,0])translate(MainBoardButtons)Button();
 }
 
+translate([200,0,0]){
+    translate([0,0,50.0])CaseTop();
+    translate([0,0,25.0])CaseMid();
+    translate([0,0,-25.0])CaseBottomLid();
+}
+
+translate([300,0,0]){
+    translate([0,0,50.0])CaseTop();
+    translate([0,0,25.0])CaseMid();
+    translate([0,0,-25.0])CaseBottomLid();
+}
+
+
 MainBoardComplete();
+translate([100,0,0])MainBoardComplete();
+translate([200,0,0])MainBoardComplete();
