@@ -47,6 +47,10 @@ module CaseBaseShape(){
         RoundedSquare(BorderRadius,CaseWidth,CaseLength);
 }
 
+module CaseBaseShape3D(){
+    //BorderRadius(
+}
+
 {  //Display
     module DisplayPanelHole(){
         width = 23.0;
@@ -177,6 +181,7 @@ module BoardMountingLips(){
                 cylinder(d=10,MainBoardLipHeight);   
         }
     }
+
 }
 
 module CaseMid(){
@@ -222,9 +227,8 @@ module CaseBottomLid(){
 }
 
 module ButtonSpring(){
-
-    color("silver")
-        cylinder(d=6,4);
+    color("silver")        
+        Helix(3,3,5,0.2,0.1);
 }
 
 module Button(){
