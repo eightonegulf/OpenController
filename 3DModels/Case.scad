@@ -38,6 +38,7 @@ DisplayRiserHeight = 1;
 DisplayMountHolesDiameter = M3BoltDiaSelfTap;
 
 module MainPCBShapeMargin(){
+    $fn=20;
     minkowski(){
         hull()
             MainBoardPCBShape();
@@ -275,7 +276,7 @@ module CaseMid(){
         mirror([0,0,1]){
             for(i = USBBoardMountingHoles){
                 translate(PowerboardConnector  + i)
-                    cylinder(d=2,USBBoardLipHeight + 1);  
+                    cylinder(d=M2BoltDiaSelfTap,USBBoardLipHeight + 1, $fn=20);  
                 
                 translate([0,0,USBBoardLipHeight])
                 translate(PowerboardConnector  + i)
@@ -401,26 +402,23 @@ module Case(){
         mirror([1,0,0])SidePeripheralCutout();
         BottomPeripheralCutout();
     }
-    
-    
-    translate([28,15])cylinder(d=M2BoltDia,50,center=true, $fn=20);
 }
 
 
 module SidePeripheralCutout(){
     translate([0,0,-1])
     mirror([0,0,1])
-        translate([0,10])
-            linear_extrude(13.5)
+        translate([0,10,1.5])
+            linear_extrude(12)
                 square([100,50]);
 }
 
 module BottomPeripheralCutout(){
     translate([0,0,-1])
     mirror([0,0,1])
-        translate([0,10])
-            linear_extrude(13.5)
-                square([35,50],center=true);
+        translate([0,-5,1.5])
+            linear_extrude(12)
+                square([35,10],center=true);
     
 }
 
