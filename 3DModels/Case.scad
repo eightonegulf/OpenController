@@ -214,7 +214,7 @@ module BoardMountingLips(){
 
         for(i = MainBoardMountingHoles){
             translate(i)
-                cylinder(d=10,MainBoardLipHeight);   
+                cylinder(d=6,MainBoardLipHeight);   
         }
     }
 }
@@ -350,7 +350,7 @@ module CaseBottomLid(){
                 translate([0,0,CaseBottomThickness]){
                     for(i = MainBoardMountingHoles){
                         translate(i)
-                            cylinder(d=10,MainPCBGap);   
+                            cylinder(d=6,MainPCBGap);   
                     }
                     
                     translate(MainBoardRotaryEncoder)
