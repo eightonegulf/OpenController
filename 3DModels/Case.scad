@@ -430,50 +430,13 @@ module BottomPeripheralCutout(){
     
 }
 
-/*
-linear_extrude(10)
-difference(){
-    CaseBaseShape();
-    MainPCBShapeMargin();
-}
-*/
-
-translate([-100,0,0]){
-    translate([0,0,14.6])CaseMid();
-    //translate([0,0,-5.1])CaseBottomLid();
-}
-
 
 translate([0,0,14.6])Case();
 translate([0,0,-5.1])CaseBottomLid();
 
-
-translate([100,0,0]){
-    translate([0,0,25.0])Case();
-    translate([0,0,-25.0])CaseBottomLid();
-}
-
 translate([0,0,7.8]){
     translate(MainBoardButtons)Button();
     mirror([1,0,0])translate(MainBoardButtons)Button();
-}
-
-translate([200,0,0]){
-    translate([0,0,50.0])CaseTop();
-    translate([0,0,25.0])CaseMid();
-    translate([0,0,-25.0])CaseBottomLid();
-}
-
-translate([300,0,0]){
-    translate([0,0,50.0])CaseTop();
-    translate([0,0,25.0])CaseMid();
-    //translate([0,0,-25.0])CaseBottomLid();
-}
-
-translate([400,0,0]){
-    translate([0,0,25.0])CaseTop();
-    translate([0,0,25.0])CaseMid();
-    //translate([0,0,-25.0])CaseBottomLid();
 }
 
 
@@ -481,6 +444,3 @@ translate([400,0,0]){
 
 
 MainBoardComplete();
-translate([100,0,0])MainBoardComplete();
-translate([200,0,0])MainBoardComplete();
-translate([-100,0,0])OtherBoards();
