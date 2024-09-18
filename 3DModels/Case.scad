@@ -22,7 +22,7 @@ MainBoardMargin = 0.5;
 BorderSizeSide = 5;
 BorderSizeBottom = 5;
 BorderSizeTop = 2;
-BorderRadius = 5;
+BorderRadius = 4;
 
 CaseTopThickness = 3;
 CaseBottomThickness = 3;
@@ -54,9 +54,9 @@ module CaseOutline(){
     }
 }
 
-
 module CaseBaseShape3D(){
-    //BorderRadius(
+    translate([0,CaseLength/2 - BorderSizeBottom,-100])
+        RoundedCube(BorderRadius,CaseWidth,CaseLength,200);
 }
 
 {  //Display
@@ -141,15 +141,20 @@ module CaseTop(){
     render()
     difference(){
         union(){
-            linear_extrude(CaseTopThickness)
-            render()
-            difference(){
-                CaseBaseShape();
-                translate(MainBoardRotaryEncoder)circle(d=5.5);
-                translate(MainBoardButtons)circle(d=5);
-                mirror([1,0,0])
-                    translate(MainBoardButtons)circle(d=5);
-            }   
+            intersection(){
+                linear_extrude(CaseTopThickness)
+                    render()
+                        difference(){
+                            CaseBaseShape();
+                            translate(MainBoardRotaryEncoder)circle(d=5.5);
+                            translate(MainBoardButtons)circle(d=5);
+                            mirror([1,0,0])
+                                translate(MainBoardButtons)circle(d=5);
+                        }   
+                       
+                translate([0,0, CaseTopThickness])
+                    CaseBaseShape3D();
+            }
             
             translate(MainBoardTFTDisplay)
                 DisplayRisers();
@@ -162,6 +167,9 @@ module CaseTop(){
         CaseBoltHeads(); 
         CaseBolts();
     }    
+    
+
+
 }
 
     USBBoardLipHeight = 6.2;
@@ -201,22 +209,42 @@ module USBPortHoleFlat(){
 }
 
 module USBPortHole(){
-    linear_extrude(1)
-        USBPortHoleFlat();
-    
-    linear_extrude(1)
-        scale(1.5)
+    $fn = 25;
+    rotate([-90,0,0]){
+        linear_extrude(1)
             USBPortHoleFlat();
+        
+        translate([0,0,1])
+            linear_extrude(1)
+                scale(1.5)
+                    USBPortHoleFlat();
+        
+        hull(){
+            translate([0,0,2])
+                linear_extrude(1)
+                    scale(1.5)
+                        USBPortHoleFlat();
+            translate([0,0,5])
+                linear_extrude(1)
+                    scale(5)
+                        USBPortHoleFlat();        
+        }
+    }
 }
 
 module CaseMid(){
     render()
     difference(){
-        union(){
-            BoardMountingLips();
-            mirror([0,0,1])
-            linear_extrude(MainBoardLipHeight)
-                CaseOutline();
+        intersection(){
+            union(){
+                BoardMountingLips();
+                mirror([0,0,1])
+                linear_extrude(MainBoardLipHeight)
+                    CaseOutline();                                     
+            }
+
+            translate([0,0,CaseTopThickness])
+                CaseBaseShape3D();
         }
         
         CaseBolts();
@@ -234,15 +262,11 @@ module CaseMid(){
                 translate(PowerboardConnector  + i)
                     linear_extrude(100)
                     square([5,10],center=true);
-            }
-            
+            }            
         }
-    }
-    
-
-linear_extrude(100)
-USBPortHole();
-
+        
+        translate([0,72,-9])USBPortHole();
+    }   
 }
 
 module CaseBottomLid(){
@@ -250,28 +274,33 @@ module CaseBottomLid(){
     
     render()
     difference(){
-        union(){
-            linear_extrude(MainPCBGap + CaseBottomThickness)
-                CaseOutline();
-            
-            linear_extrude(CaseBottomThickness)
-                CaseBaseShape();
-            
-            translate([0,0,CaseBottomThickness]){
-                for(i = MainBoardMountingHoles){
-                    translate(i)
-                        cylinder(d=10,MainPCBGap);   
-                }
+        intersection(){
+            union(){
+                linear_extrude(MainPCBGap + CaseBottomThickness)
+                    CaseOutline();
                 
-                translate(MainBoardRotaryEncoder)
-                    cylinder(d=6,MainPCBGap);
+                linear_extrude(CaseBottomThickness)
+                    CaseBaseShape();
                 
-                translate(MainBoardButtons)
-                    cylinder(d=4,MainPCBGap);
-                mirror([1,0,0])
+                translate([0,0,CaseBottomThickness]){
+                    for(i = MainBoardMountingHoles){
+                        translate(i)
+                            cylinder(d=10,MainPCBGap);   
+                    }
+                    
+                    translate(MainBoardRotaryEncoder)
+                        cylinder(d=6,MainPCBGap);
+                    
                     translate(MainBoardButtons)
                         cylinder(d=4,MainPCBGap);
+                    mirror([1,0,0])
+                        translate(MainBoardButtons)
+                            cylinder(d=4,MainPCBGap);
+                }               
             }
+            
+            mirror([0,0,1])
+                CaseBaseShape3D();
         }
         
         CaseBolts();

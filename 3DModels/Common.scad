@@ -16,6 +16,23 @@ module RoundedSquareExclRadius(radius, x, y){
     }
 }
 
+module RoundedCube(radius, x, y, z){
+    x2 = x/2 - radius;
+    y2 = y/2 - radius;
+    z2 = z/2 - radius;
+    
+    hull(){
+        translate([x2,y2,z2])sphere(radius);
+        translate([x2,y2,-z2])sphere(radius);
+        translate([x2,-y2,z2])sphere(radius);
+        translate([x2,-y2,-z2])sphere(radius);
+        translate([-x2,y2,z2])sphere(radius);
+        translate([-x2,y2,-z2])sphere(radius);
+        translate([-x2,-y2,z2])sphere(radius);
+        translate([-x2,-y2,-z2])sphere(radius);
+    }
+}
+
 module HelixSegment(radius, pitch, wireRadius, resolution, i){
     rotate(i * 360)
         translate([radius,0,pitch*i])
