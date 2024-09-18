@@ -382,9 +382,17 @@ module ButtonSpring(){
 }
 
 module Button(){
+    $fn = 20;
     color("darkgray"){
-        cylinder(d=4.5,10.5);
-        cylinder(d=7,3);
+        render()
+        difference(){
+            union(){
+                cylinder(d=4.5,10.5);
+                cylinder(d=7,3);
+            }
+            
+            cylinder(d=3.5,1);            
+        }
     }
     
     translate([0,0,3])ButtonSpring();
