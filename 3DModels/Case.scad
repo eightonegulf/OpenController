@@ -187,11 +187,20 @@ module BoardMountingLips(){
 }
 
 module CaseMid(){
-    render();
+    render()
     difference(){
-        BoardMountingLips();
-        CaseBolts();
+        union(){
+            BoardMountingLips();
+            mirror([0,0,1])
+            linear_extrude(MainBoardLipHeight)
+            difference(){
+                CaseBaseShape();            
+                MainPCBShapeMargin();
+            }
+        }
         
+        CaseBolts();
+            
         translate([0,0,-MainBoardLipHeight])
             linear_extrude(1.6)
                 MainPCBShapeMargin();
@@ -263,9 +272,9 @@ translate([0,0,-5.1])CaseBottomLid();
 
 
 translate([100,0,0]){
-translate([0,0,25.6])CaseTop();
-translate([0,0,14.6])CaseMid();
-translate([0,0,-20.1])CaseBottomLid();
+translate([0,0,25.0])CaseTop();
+translate([0,0,25.0])CaseMid();
+translate([0,0,-25.0])CaseBottomLid();
 }
 
 translate([0,0,7.8]){
