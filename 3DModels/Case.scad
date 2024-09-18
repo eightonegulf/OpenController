@@ -2,11 +2,13 @@ include <MainBoard.scad>;
 include <USBBoard.scad>;
 include <Common.scad>;
 
+//$fn = 50;
 
 M3NutDia = 5.5;
 M3BoltHexHeadDia = 5.8;
 M3BoltHexHeadHeight = 3;
 M3BoltDia = 3;
+M3BoltDiaSelfTap = 2.9;
 
 
 
@@ -14,6 +16,7 @@ M2NutDia = 4.5;
 M2BoltHexHeadDia = 5.8;
 M2BoltHexHeadHeight = 2;
 M2BoltDia = 2;
+M2BoltDiaSelfTap = 1.9;
 
 MainBoardWidth = 50;
 MainBoardLength = 72;
@@ -32,7 +35,7 @@ CaseLength = MainBoardLength + BorderSizeBottom + BorderSizeTop;
 
 DisplayPosition = [0,47];
 DisplayRiserHeight = 1;
-DisplayMountHolesDiameter = 3;
+DisplayMountHolesDiameter = M3BoltDiaSelfTap;
 
 module MainPCBShapeMargin(){
     minkowski(){
@@ -95,7 +98,8 @@ module CaseBaseShape3D(){
             translate(i)
                 cylinder(
                     d=DisplayMountHolesDiameter,
-                    CaseTopThickness + DisplayRiserHeight - 1); 
+                    CaseTopThickness + DisplayRiserHeight - 1,
+                    $fn = 20); 
     }
     
     module DisplayHoles(){      
@@ -108,7 +112,10 @@ module CaseBaseShape3D(){
         translate([0,0,-DisplayRiserHeight])
             for(i = TFTDisplayMountHolePositions)
                 translate(i)
-                    cylinder(d=5,DisplayRiserHeight); 
+                    cylinder(
+                        d=5,
+                        DisplayRiserHeight,
+                        $fn = 20); 
     }
 }
 
@@ -125,14 +132,21 @@ module CaseBoltHeads(){
     translate([0,0,CaseTopThickness - M3BoltHexHeadHeight])
         for(i = MainBoardMountingHoles){
             translate(i)
-                cylinder(d=M3BoltHexHeadDia,M3BoltHexHeadHeight+1);   
+                cylinder(
+                    d=M3BoltHexHeadDia,
+                    M3BoltHexHeadHeight+1,
+                    $fn = 20);   
         }
 }
 module CaseBolts(){
     translate([0,0,CaseTopThickness - M3BoltHexHeadHeight])
         for(i = MainBoardMountingHoles){
             translate(i)
-                cylinder(d=M3BoltDia,500,center=true);   
+                cylinder(
+                    d=M3BoltDia,
+                    500,
+                    center=true,
+                    $fn = 20);   
         }
 }
 
@@ -146,10 +160,10 @@ module CaseTop(){
                     render()
                         difference(){
                             CaseBaseShape();
-                            translate(MainBoardRotaryEncoder)circle(d=5.5);
-                            translate(MainBoardButtons)circle(d=5);
+                            translate(MainBoardRotaryEncoder)circle(d=5.5, $fn=20);
+                            translate(MainBoardButtons)circle(d=5, $fn=20);
                             mirror([1,0,0])
-                                translate(MainBoardButtons)circle(d=5);
+                                translate(MainBoardButtons)circle(d=5, $fn=20);
                         }   
                        
                 translate([0,0, CaseTopThickness])
@@ -276,11 +290,11 @@ module CaseMid(){
 
 module LightPipeCutoutTrace(){
     $fn= 20;
-    width = 3;
+    width = 2;
     radius = 4;
     length = 5;
     
-    translate([4,-1]){
+    translate([3,0]){
         translate([-radius,-radius])
         intersection(){
             difference(){
@@ -376,10 +390,38 @@ module Button(){
 }
 
 module Case(){
-    union(){
-        CaseTop();
-        CaseMid();
+    render()
+    difference(){
+        union(){
+            CaseTop();
+            CaseMid();
+        }
+
+        SidePeripheralCutout();
+        mirror([1,0,0])SidePeripheralCutout();
+        BottomPeripheralCutout();
     }
+    
+    
+    translate([28,15])cylinder(d=M2BoltDia,50,center=true, $fn=20);
+}
+
+
+module SidePeripheralCutout(){
+    translate([0,0,-1])
+    mirror([0,0,1])
+        translate([0,10])
+            linear_extrude(13.5)
+                square([100,50]);
+}
+
+module BottomPeripheralCutout(){
+    translate([0,0,-1])
+    mirror([0,0,1])
+        translate([0,10])
+            linear_extrude(13.5)
+                square([35,50],center=true);
+    
 }
 
 /*
@@ -427,7 +469,6 @@ translate([400,0,0]){
     translate([0,0,25.0])CaseMid();
     //translate([0,0,-25.0])CaseBottomLid();
 }
-
 
 
 
