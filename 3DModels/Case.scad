@@ -168,11 +168,9 @@ module CaseTop(){
     USBBoardLipLength = 8.5;
     MainBoardLipHeight = 12.9 + 1.6;
 
-module BoardMountingLips(){
-
-    
+module BoardMountingLips(){    
     mirror([0,0,1]){
-        linear_extrude(USBBoardLipHeight){
+        linear_extrude(USBBoardLipHeight-2){
             intersection(){
                 translate([0,CaseLength - BorderSizeBottom - USBBoardLipLength/2])
                     square([CaseWidth,USBBoardLipLength],center=true);           
@@ -191,7 +189,24 @@ module BoardMountingLips(){
                 cylinder(d=10,MainBoardLipHeight);   
         }
     }
+}
 
+module USBPortHoleFlat(){
+    hull(){
+        translate([3,0,0])
+            circle(d=3);
+        translate([-3,0,0])
+            circle(d=3);
+    }
+}
+
+module USBPortHole(){
+    linear_extrude(1)
+        USBPortHoleFlat();
+    
+    linear_extrude(1)
+        scale(1.5)
+            USBPortHoleFlat();
 }
 
 module CaseMid(){
@@ -209,9 +224,24 @@ module CaseMid(){
         translate([0,0,-MainBoardLipHeight])
             linear_extrude(1.6)
                 MainPCBShapeMargin();
+        
+        mirror([0,0,1]){
+            for(i = USBBoardMountingHoles){
+                translate(PowerboardConnector  + i)
+                    cylinder(d=2,USBBoardLipHeight + 1);  
+                
+                translate([0,0,USBBoardLipHeight])
+                translate(PowerboardConnector  + i)
+                    linear_extrude(100)
+                    square([5,10],center=true);
+            }
+            
+        }
     }
     
-        
+
+linear_extrude(100)
+USBPortHole();
 
 }
 
@@ -281,6 +311,12 @@ difference(){
 }
 */
 
+translate([-100,0,0]){
+    translate([0,0,14.6])CaseMid();
+    //translate([0,0,-5.1])CaseBottomLid();
+}
+
+
 translate([0,0,14.6])Case();
 translate([0,0,-5.1])CaseBottomLid();
 
@@ -304,10 +340,15 @@ translate([200,0,0]){
 translate([300,0,0]){
     translate([0,0,50.0])CaseTop();
     translate([0,0,25.0])CaseMid();
-    translate([0,0,-25.0])CaseBottomLid();
+    //translate([0,0,-25.0])CaseBottomLid();
 }
+
+
+
+
 
 
 MainBoardComplete();
 translate([100,0,0])MainBoardComplete();
 translate([200,0,0])MainBoardComplete();
+translate([-100,0,0])OtherBoards();
